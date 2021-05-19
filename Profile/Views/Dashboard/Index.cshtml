@@ -1,0 +1,124 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ProfileDetails
+
+<div class="row">
+    <div class="offset-3 col-md-6">
+        <form method="post" asp-controller="Service" asp-action="Index">
+            <fieldset class="border-success">
+                <Legend>Personal Information</Legend>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="@Model.FirstName"></label>
+                    <input asp-for="@Model.FirstName" class="form-control" />
+                    <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.LastName"></label>
+                    <input asp-for="@Model.LastName" class="form-control" />
+                    <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Profession"></label>
+                    <input asp-for="@Model.Profession" class="form-control" />
+                    <span asp-validation-for="@Model.Profession" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Qualifications"></label>
+                    <input asp-for="@Model.Qualifications" class="form-control" />
+                    <span asp-validation-for="@Model.Qualifications" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.LinkedInUrl"></label>
+                    <input asp-for="@Model.LinkedInUrl" class="form-control" />
+                    <span asp-validation-for="@Model.LinkedInUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.GitHubUrl"></label>
+                    <input asp-for="@Model.GitHubUrl" class="form-control" />
+                    <span asp-validation-for="@Model.GitHubUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.PhoneNumber"></label>
+                    <input asp-for="@Model.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Email"></label>
+                    <input asp-for="@Model.Email" class="form-control" />
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="@Model.Password"></label>
+                    <input type="password" asp-for="@Model.Password" class="form-control" />
+                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                </div>*@
+                @*<div class="form-group">*@
+                    @*<label asp-for="ConfirmPassword"></label>*@
+                    @*<input asp-for="@obj." class="form-control" />*@
+                    @*<span asp-validation-for="ConfirmPassword" class="text-danger"></span>*@
+                @*</div>*@
+            </fieldset>
+            @foreach (var obj in Model.WorkExperiences)
+            {
+<fieldset>
+    <legend>Work Experience</legend>
+    <div class="form-group">
+        <label asp-for="@obj.CompanyName"></label>
+        <input asp-for="@obj.CompanyName" class="form-control" />
+        <span asp-validation-for="@obj.CompanyName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@obj.JobTitle"></label>
+        <input asp-for="@obj.JobTitle" class="form-control" />
+        <span asp-validation-for="@obj.JobTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@obj.JobDescription"></label>
+        <textarea asp-for="@obj.JobDescription" class="form-control"></textarea>
+        <span asp-validation-for="@obj.JobDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@obj.YearStarted"></label>
+        <input asp-for="@obj.YearStarted" class="form-control" />
+        <span asp-validation-for="@obj.YearStarted" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@obj.YearEnded"></label>
+        <input asp-for="@obj.YearEnded" class="form-control" />
+        <span asp-validation-for="@obj.YearEnded" class="text-danger"></span>
+    </div>
+</fieldset>}
+
+            @foreach (var obj in Model.Addresses)
+            {
+<fieldset>
+    <legend>Contact address</legend>
+    <div class="form-group">
+        <label asp-for="@obj.Street"></label>
+        <input asp-for="@obj.Street" class="form-control" />
+        <span asp-validation-for="@obj.Street" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@obj.City"></label>
+        <input asp-for="@obj.City" class="form-control" />
+        <span asp-validation-for="@obj.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@obj.State"></label>
+        <input asp-for="@obj.State" class="form-control" />
+        <span asp-validation-for="@obj.State" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@obj.Country"></label>
+        <input asp-for="@obj.Country" class="form-control" />
+        <span asp-validation-for="@obj.Country" class="text-danger"></span>
+    </div>
+</fieldset>            }
+            @*<button type="submit" class="btn btn-primary">Update</button>*@
+        </form>
+    </div>
+</div>
