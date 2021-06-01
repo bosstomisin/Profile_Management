@@ -58,8 +58,7 @@ namespace Profile.Migrations
                 name: "Contacts",
                 columns: table => new
                 {
-                    ContactId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
@@ -67,7 +66,7 @@ namespace Profile.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contacts", x => x.ContactId);
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,18 +94,16 @@ namespace Profile.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    AddressId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     Street = table.Column<string>(type: "TEXT", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: true),
                     State = table.Column<string>(type: "TEXT", nullable: true),
                     Country = table.Column<string>(type: "TEXT", nullable: true),
-                    ProfileId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProfileDetailsId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Addresses_AspNetUsers_ProfileDetailsId",
                         column: x => x.ProfileDetailsId,
@@ -204,19 +201,17 @@ namespace Profile.Migrations
                 name: "WorkExperiences",
                 columns: table => new
                 {
-                    WorkExperienceId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     CompanyName = table.Column<string>(type: "TEXT", nullable: true),
                     JobTitle = table.Column<string>(type: "TEXT", nullable: true),
                     JobDescription = table.Column<string>(type: "TEXT", nullable: true),
-                    YearStarted = table.Column<string>(type: "TEXT", nullable: true),
-                    YearEnded = table.Column<string>(type: "TEXT", nullable: true),
-                    ProfileId = table.Column<int>(type: "INTEGER", nullable: false),
+                    YearStarted = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    YearEnded = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProfileDetailsId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkExperiences", x => x.WorkExperienceId);
+                    table.PrimaryKey("PK_WorkExperiences", x => x.Id);
                     table.ForeignKey(
                         name: "FK_WorkExperiences_AspNetUsers_ProfileDetailsId",
                         column: x => x.ProfileDetailsId,
@@ -228,7 +223,8 @@ namespace Profile.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_ProfileDetailsId",
                 table: "Addresses",
-                column: "ProfileDetailsId");
+                column: "ProfileDetailsId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -270,7 +266,8 @@ namespace Profile.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_WorkExperiences_ProfileDetailsId",
                 table: "WorkExperiences",
-                column: "ProfileDetailsId");
+                column: "ProfileDetailsId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

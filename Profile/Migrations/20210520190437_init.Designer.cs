@@ -9,8 +9,8 @@ using Profile.Data;
 namespace Profile.Migrations
 {
     [DbContext(typeof(ProfileDbContext))]
-    [Migration("20210518191338_init2")]
-    partial class init2
+    [Migration("20210520190437_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -218,9 +218,8 @@ namespace Profile.Migrations
 
             modelBuilder.Entity("Profile.Models.Address", b =>
                 {
-                    b.Property<int>("AddressId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
@@ -231,27 +230,24 @@ namespace Profile.Migrations
                     b.Property<string>("ProfileDetailsId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("State")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Street")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("AddressId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ProfileDetailsId");
+                    b.HasIndex("ProfileDetailsId")
+                        .IsUnique();
 
                     b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Profile.Models.Contact", b =>
                 {
-                    b.Property<int>("ContactId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -269,16 +265,15 @@ namespace Profile.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ContactId");
+                    b.HasKey("Id");
 
                     b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("Profile.Models.WorkExperience", b =>
                 {
-                    b.Property<int>("WorkExperienceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
                         .HasColumnType("TEXT");
@@ -292,18 +287,16 @@ namespace Profile.Migrations
                     b.Property<string>("ProfileDetailsId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("YearEnded")
+                    b.Property<DateTime>("YearEnded")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("YearStarted")
+                    b.Property<DateTime>("YearStarted")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("WorkExperienceId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ProfileDetailsId");
+                    b.HasIndex("ProfileDetailsId")
+                        .IsUnique();
 
                     b.ToTable("WorkExperiences");
                 });
@@ -389,23 +382,27 @@ namespace Profile.Migrations
 
             modelBuilder.Entity("Profile.Models.Address", b =>
                 {
-                    b.HasOne("Profile.Models.ProfileDetails", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("ProfileDetailsId");
+                    b.HasOne("Profile.Models.ProfileDetails", "ProfileDetails")
+                        .WithOne("Address")
+                        .HasForeignKey("Profile.Models.Address", "ProfileDetailsId");
+
+                    b.Navigation("ProfileDetails");
                 });
 
             modelBuilder.Entity("Profile.Models.WorkExperience", b =>
                 {
-                    b.HasOne("Profile.Models.ProfileDetails", null)
-                        .WithMany("WorkExperiences")
-                        .HasForeignKey("ProfileDetailsId");
+                    b.HasOne("Profile.Models.ProfileDetails", "ProfileDetails")
+                        .WithOne("WorkExperience")
+                        .HasForeignKey("Profile.Models.WorkExperience", "ProfileDetailsId");
+
+                    b.Navigation("ProfileDetails");
                 });
 
             modelBuilder.Entity("Profile.Models.ProfileDetails", b =>
                 {
-                    b.Navigation("Addresses");
+                    b.Navigation("Address");
 
-                    b.Navigation("WorkExperiences");
+                    b.Navigation("WorkExperience");
                 });
 #pragma warning restore 612, 618
         }

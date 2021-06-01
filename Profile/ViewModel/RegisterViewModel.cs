@@ -40,9 +40,11 @@ namespace Profile.ViewModel
         [DisplayName("Job Description")]
         public string JobDescription { get; set; }
         [DisplayName("Year Started")]
-        public string YearStarted { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime YearStarted { get; set; }
         [DisplayName("Year Ended")]
-        public string YearEnded { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime YearEnded { get; set; }
 
         public string Street { get; set; }
         public string City { get; set; }

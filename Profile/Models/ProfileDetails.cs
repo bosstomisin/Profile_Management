@@ -9,11 +9,12 @@ namespace Profile.Models
 {
     public class ProfileDetails : IdentityUser
     {
-        public ProfileDetails()
-        {
-            WorkExperiences = new List<WorkExperience>();
-            Addresses = new List<Address>();
-        }
+        
+        //public ProfileDetails()
+        //{
+        //    WorkExperiences = new List<WorkExperience>();
+        //    Addresses = new List<Address>();
+        //}
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Profession { get; set; }
@@ -22,7 +23,7 @@ namespace Profile.Models
         public string GitHubUrl { get; set; }
         public string Password { get; set; }
 
-        public List<WorkExperience> WorkExperiences { get; set; }
-        public List<Address> Addresses { get; set; }
+        public WorkExperience WorkExperience { get; set; }
+        public Address Address { get; set; }
     }
 }

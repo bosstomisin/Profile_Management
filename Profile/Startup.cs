@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Profile.Data;
+using Profile.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace Profile
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ProfileDbContext>(options => options.UseSqlite(connectionString));
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ProfileDbContext>();
+            services.AddIdentity<ProfileDetails, IdentityRole>().AddEntityFrameworkStores<ProfileDbContext>();
             services.AddControllersWithViews();
         }
 
@@ -66,6 +67,7 @@ namespace Profile
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            Seed.EnsurePopulated(app);
         }
     }
 }

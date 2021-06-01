@@ -8,8 +8,15 @@ namespace Profile.Models
 {
     public class Contact
     {
+        public Contact()
+        {
+            
+           
+                Id = Guid.NewGuid().ToString();
+           
+        }
         [Key]
-        public int ContactId { get; set; }
+        public string Id { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]

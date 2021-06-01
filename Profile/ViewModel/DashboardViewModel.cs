@@ -22,8 +22,10 @@ namespace Profile.ViewModel
         public string CompanyName { get; set; }
         public string JobTitle { get; set; }
         public string JobDescription { get; set; }
-        public string YearStarted { get; set; }
-        public string YearEnded { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime YearStarted { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime YearEnded { get; set; }
 
         public string Street { get; set; }
         public string City { get; set; }

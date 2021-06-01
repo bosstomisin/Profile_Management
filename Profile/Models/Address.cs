@@ -9,13 +9,18 @@ namespace Profile.Models
 {
     public class Address
     {
+        public Address()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
         [Key]
-        public int AddressId { get; set; }
+        public string Id { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        [ForeignKey("ProfileId")]
-        public int ProfileId { get; set; }
+        public string ProfileDetailsId { get; set; }
+        [ForeignKey("ProfileDetailsId")]
+        public ProfileDetails ProfileDetails  { get; set; }
     }
 }

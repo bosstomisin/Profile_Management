@@ -14,26 +14,27 @@ namespace Profile.Controllers
         public ContactController(ProfileDbContext db)
         {
             _db = db;
-        }       
-        public IActionResult Index()
+        }
+        [HttpGet]
+       public IActionResult Index()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Submit(Contact obj )
+        public IActionResult Submit(Contact obj)
         {
             if (ModelState.IsValid)
             {
-                _db.Contacts.Add(obj);
+                var contact = new Contact { FirstName = obj.FirstName, LastName =obj.LastName, Email= obj.Email,Message = obj.Message };
+                _db.Contacts.Add(contact);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
 
             }
             return View(obj);
-            
-    }
+
+        }
 
     }
 }
-  

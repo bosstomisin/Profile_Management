@@ -1,27 +1,28 @@
-﻿
+﻿@model Profile.Models.ProfileDetails
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
-@*<div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>*@
+ 
 <div class="banner">
     <img src="~/images/landscape-evening.jpg" alt="banner" />
 </div>
 
 <div class="profile text-center">
     <img class="rounded-circle" src="~/images/Snapchat-491491460_1.jpg" alt="Profile pix" />
-    <h3>Adereti Tomisin</h3>
-    <h6>Software Developer @@  Decagon institute(Full Stack .Net) <br /> Lagos nigeria</h6>
+    <h3>@Model.FirstName @Model.LastName</h3>
+    <h6>@Model.Profession @@  @Model.WorkExperience.CompanyName (@Model.WorkExperience.JobTitle @Model.WorkExperience.JobDescription) <br /> @Model.Address.City @Model.Address.Country</h6>
    
-    <a asp-controller="Contact" asp-route-Id="" asp-action="Index" class="btn btn-primary mx-2">Message </a>
-    <a asp-controller="Dashboard" asp-route-Id="" asp-action="Index" class="btn btn-primary mx-2">More... </a>
-
+    <a asp-controller="Contact" asp-route-Id="" asp-action="Index" class="btn btn-primary text-center ">Message </a>
+    @*<a asp-controller="Dashboard" asp-route-Id="" asp-action="Index" class="btn btn-primary mx-2">More... </a>*@
+    @*@{ 
+        @if(ViewBag.Message as string != null)
+         {
+            <h2 class="text-success">@ViewBag.Message</h2>
+         }
+    }*@
 </div>
-<div class="col-8">
 
-</div>
 
 

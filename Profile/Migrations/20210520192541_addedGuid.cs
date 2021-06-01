@@ -2,7 +2,7 @@
 
 namespace Profile.Migrations
 {
-    public partial class init2 : Migration
+    public partial class addedGuid : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

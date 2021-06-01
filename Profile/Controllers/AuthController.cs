@@ -12,11 +12,11 @@ namespace Profile.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ProfileDetails> _userManager;
+        private readonly SignInManager<ProfileDetails> _signInManager;
 
-        public AuthController(UserManager<IdentityUser> userManager,
-                                      SignInManager<IdentityUser> signInManager)
+        public AuthController(UserManager<ProfileDetails> userManager,
+                                      SignInManager<ProfileDetails> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -25,6 +25,8 @@ namespace Profile.Controllers
         {
             return View();
         }
+
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
@@ -35,27 +37,10 @@ namespace Profile.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Address = new Address
-                {
-                    Country = model.Country,
-                    State = model.State,
-                    City = model.City,
-                    Street = model.Street,
-                };
-
-                var WorkExperience = new WorkExperience
-                {
-                    CompanyName = model.CompanyName,
-                    JobDescription = model.JobDescription,
-                    JobTitle = model.JobTitle,
-                    YearEnded = model.YearEnded,
-                    YearStarted = model.YearStarted,
-                };
-
                 var user = new ProfileDetails
                 {
                     UserName = model.Email,
-                    Email = model.Email, 
+                    Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
                     Profession = model.Profession,
                     Qualifications = model.Qualifications,
@@ -63,19 +48,30 @@ namespace Profile.Controllers
                     GitHubUrl = model.GitHubUrl,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
+                    Address = new Address {
+                        Street = model.Street,
+                        City = model.City,
+                        State = model.State,
+                        Country = model.Country
+                    },
+                    WorkExperience = new WorkExperience {
+                        CompanyName = model.CompanyName,
+                        JobTitle = model.JobTitle,
+                        JobDescription = model.JobDescription,
+                        YearStarted = model.YearStarted,
+                        YearEnded = model.YearEnded
+                    },
                 };
-
-                user.Addresses.Add(Address);
-                user.WorkExperiences.Add(WorkExperience);
-
-
+               
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("index", "Home");
+                    //ViewBag.Message = "Congratulations! Tomisin";
+
+                    return RedirectToAction("Index", "Home", new { Message = ViewBag.Message });
                 }
 
                 foreach (var error in result.Errors)
@@ -100,7 +96,7 @@ namespace Profile.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password,false, false);
+                var result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, false, false);
 
                 if (result.Succeeded)
                 {

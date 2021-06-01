@@ -27,7 +27,6 @@ C:\Users\hp\source\repos\Profile\Profile\obj\Debug\netcoreapp3.1\Profile.dll
 C:\Users\hp\source\repos\Profile\Profile\obj\Debug\netcoreapp3.1\Profile.pdb
 C:\Users\hp\source\repos\Profile\Profile\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\hp\source\repos\Profile\Profile\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\hp\source\repos\Profile\Profile\bin\Debug\netcoreapp3.1\Profile.StaticWebAssets.xml
 C:\Users\hp\source\repos\Profile\Profile\bin\Debug\netcoreapp3.1\Profile.exe
 C:\Users\hp\source\repos\Profile\Profile\bin\Debug\netcoreapp3.1\Profile.deps.json
 C:\Users\hp\source\repos\Profile\Profile\bin\Debug\netcoreapp3.1\Profile.runtimeconfig.json
